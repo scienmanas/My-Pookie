@@ -13,9 +13,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body
-        className={`antialiase  bg-[#eaeaea] scroll-smooth`}
-      >
+      <body className={`antialiase  bg-white overflow-x-hidden scroll-smooth`}>
         {children}
         <GoogleAnalytics
           gaId={process.env.G_ANALYTICS_ID as string}
