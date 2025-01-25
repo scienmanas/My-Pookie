@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "@/app/globals.css";
 import metaDataImg from "@/public/metadata/landing.png";
+import { GoogleAnalytics } from "@next/third-parties/google";
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.DOMAIN as string),
@@ -39,7 +40,11 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`antialiase  bg-white overflow-x-hidden scroll-smooth`}>
-        <div className="body-contents z-20">{children}</div>
+        {children}
+        <GoogleAnalytics
+          gaId={process.env.G_ANALYTICS_ID as string}
+          debugMode={false}
+        />
       </body>
     </html>
   );

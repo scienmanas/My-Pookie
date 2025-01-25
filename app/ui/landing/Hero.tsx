@@ -1,9 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { motion } from "framer-motion";
 import { pangolinFont, chewyFont, firaSansFont } from "@/app/utils/fonts";
-import { ReactTyped } from "react-typed";
 
 export function Hero() {
   return (
