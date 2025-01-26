@@ -5,6 +5,8 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Navbar } from "@/app/ui/dashboard/Navbar";
 import { Hero } from "@/app/ui/dashboard/Hero";
+import { CreatePookiePage } from "@/app/ui/dashboard/CreatePookiePage";
+import { PookiePagesList } from "@/app/ui/dashboard/PookiePagesList";
 import { Donations } from "@/app/ui/universal/Donations";
 import { Footer } from "@/app/ui/universal/Footer";
 import { FallAnimation } from "@/app/ui/animations/fall-animation";
@@ -54,6 +56,8 @@ export default function DashboardPage() {
             name={userData?.name as string}
             email={userData!.email as string}
           />
+          <CreatePookiePage />
+          <PookiePagesList />
           <Donations />
         </div>
         <Footer />

@@ -35,7 +35,7 @@ export function Hero({ name, email }: { name: string; email: string }) {
                 {email}
               </span>
               . You can now access your dashboard and start creating your Pookie
-              Pages, Again you are amazing person who is wants to wish his
+              Pages, Again you are amazing person who wants to wish his/her
               friends and family with a unique way. To logout you can press the
               button below :
             </div>
@@ -62,6 +62,14 @@ export function Hero({ name, email }: { name: string; email: string }) {
             >
               {isLoggingout ? "Logging out..." : "Logout"}
             </button>
+            <div className="delete-text text-neutral-700">
+              If at some point you want to delete your account, you can mail me
+              at:{" "}
+              <span className="text-cyan-800 underline font-semibold">
+                iamscientistmanas@gmail.com
+              </span>
+              .
+            </div>
           </div>
         </div>
       </div>
