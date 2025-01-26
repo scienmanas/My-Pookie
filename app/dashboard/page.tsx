@@ -2,8 +2,12 @@
 
 import { PageLoader } from "@/app/ui/loaders";
 import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
+import { Navbar } from "@/app/ui/dashboard/Navbar";
+import { Hero } from "@/app/ui/dashboard/Hero";
+import { Donations } from "@/app/ui/universal/Donations";
+import { Footer } from "@/app/ui/universal/Footer";
+import { FallAnimation } from "@/app/ui/animations/fall-animation";
 
 export default function DashboardPage() {
   const router = useRouter();
@@ -40,5 +44,19 @@ export default function DashboardPage() {
   }, [router]);
 
   if (!mounted) return <PageLoader />;
-  else return <section className="bg-black text-white w-full h-screen">Hi {userData?.name}, This is still in development, please wait for some time, I love you very much.</section>;
+  else
+    return (
+      <section className="w-full h-fit flex flex-col items-center justify-center gap-4">
+        <FallAnimation count={70} delayDuration={100} emoji="♥" />
+        <Navbar profilePhoto={userData?.profilePhoto as string} />
+        <div className="body-contents w-full h-fit flex flex-col items-center justify-center gap-4 mt-20">
+          <Hero
+            name={userData?.name as string}
+            email={userData!.email as string}
+          />
+          <Donations />
+        </div>
+        <Footer />
+      </section>
+    );
 }

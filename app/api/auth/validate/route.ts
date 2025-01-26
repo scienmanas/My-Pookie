@@ -1,4 +1,3 @@
-import prisma from "@/prisma/index";
 import { NextRequest, NextResponse } from "next/server";
 import { cookies } from "next/headers";
 import { oAuthGoogleClient } from "@/app/config/oAuth";
