@@ -48,10 +48,12 @@ export default function DashboardPage() {
   if (!mounted) return <PageLoader />;
   else
     return (
-      <section className="w-full h-fit flex flex-col items-center justify-center gap-4">
+      <section className="w-full h-fit relative flex flex-col items-center justify-center gap-4">
         <FallAnimation count={70} delayDuration={100} emoji="♥" />
-        <Navbar profilePhoto={userData?.profilePhoto as string} />
-        <div className="body-contents w-full h-fit flex flex-col items-center justify-center gap-4 mt-20">
+        <div className="navbar w-full h-fit z-20">
+          <Navbar profilePhoto={userData?.profilePhoto as string} />
+        </div>
+        <div className="body-contents relative z-10 w-full h-fit flex flex-col items-center justify-center gap-4 mt-12">
           <Hero
             name={userData?.name as string}
             email={userData!.email as string}

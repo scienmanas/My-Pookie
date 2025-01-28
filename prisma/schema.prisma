@@ -13,21 +13,23 @@ model User {
   email String   @unique
   date  DateTime @default(now())
 
-  pages Page[] // One-to-Many relation (User can have multiple Pages)
+  pookie Pookie[] // One-to-Many relation (User can have multiple Pages)
 }
 
-model Page {
-  id               String   @id @default(auto()) @map("_id") @db.ObjectId
-  linkName         String   @unique
-  userId           String   @db.ObjectId
-  user             User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  name             String
-  type             String
-  day              String
-  landingLine      String
-  cheezyPickupLine String
-  songId           String
-  number           Int?
-  visited          Boolean  @default(false)
-  createdAt        DateTime @default(now())
+model Pookie {
+  id                String   @id @default(auto()) @map("_id") @db.ObjectId
+  linkName          String   @unique
+  userId            String   @db.ObjectId
+  user              User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  name              String
+  type              String
+  day               String
+  landingPickupLine String
+  cheezyPickupLine  String
+  songId            String
+  number            Int?
+  visitCount        Int      @default(0)
+  accepted          Boolean  @default(false)
+  lastvisited       DateTime @default(now())
+  createdAt         DateTime @default(now())
 }
