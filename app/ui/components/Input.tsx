@@ -1,29 +1,30 @@
 export function Input({
   required,
   isSubmitting,
-  isRefreshing,
   fieldName,
   placeholder,
   name,
+  type,
   width,
   height,
 }: {
   required: boolean;
   isSubmitting: boolean;
-  isRefreshing: boolean;
   fieldName: string;
   placeholder: string;
   name: string;
+  type: string;
   width: string;
   height: string;
 }) {
   return (
     <label htmlFor={name} className="relative">
       <input
-        disabled={isSubmitting || isRefreshing}
+        autoComplete="off"
+        disabled={isSubmitting}
         required={required}
         placeholder={placeholder}
-        type="text"
+        type={type}
         name={name}
         id={name}
         style={{

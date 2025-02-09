@@ -1,18 +1,16 @@
 export function Options({
   required,
   isSubmitting,
-  isRefreshing,
   fieldName,
   name,
   options,
 }: {
   required: boolean;
   isSubmitting: boolean;
-  isRefreshing: boolean;
   fieldName: string;
   name: string;
   options: {
-    id: string;
+    id: string | number;
     name: string;
   }[];
 }) {
@@ -20,7 +18,7 @@ export function Options({
     <label htmlFor={name} className="relative w-fit h-fit">
       <select
         required={required}
-        disabled={isSubmitting || isRefreshing}
+        disabled={isSubmitting}
         id={name}
         name={name}
         className="text-sm sm:text-base rounded-lg px-4 py-2 bg-white border-2 border-neutral-300 hover:border-black transition-colors duration-300 cursor-pointer  "

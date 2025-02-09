@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
+import { Viewport } from "next";
 import metaDataImg from "@/public/metadata/landing.png";
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.DOMAIN as string),
+  metadataBase: new URL(process.env.BASE_URL as string),
   title: "My Pookie | Dashboard",
   description:
     "Want to wish your loved ones on their special day, here we comes, with a unique way to wish them. Just visit our website and send them a beautiful wish.",
@@ -13,7 +14,7 @@ export const metadata: Metadata = {
     title: "My Pookie | Dashboard",
     description:
       "Want to wish your loved ones on their special day, here we comes, with a unique way to wish them. Just visit our website and send them a beautiful wish.",
-    url: process.env.DOMAIN,
+    url: process.env.BASE_URL,
     type: "profile",
     locale: "en_US",
     siteName: process.env.SITE_NAME as string,
@@ -28,6 +29,10 @@ export const metadata: Metadata = {
     site: process.env.SITE_NAME as string,
     images: metaDataImg.src,
   },
+};
+
+export const viewport: Viewport = {
+  themeColor: "pink",
 };
 
 export default function Dashboard({

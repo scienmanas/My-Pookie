@@ -20,16 +20,17 @@ model Pookie {
   id                String   @id @default(auto()) @map("_id") @db.ObjectId
   linkName          String   @unique
   userId            String   @db.ObjectId
+  userName          String
   user              User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   name              String
   type              String
   day               String
   landingPickupLine String
-  cheezyPickupLine  String
-  songId            String
-  number            Int?
+  confessionLine  String
+  songId            Int
+  number            Int      @default(0)
   visitCount        Int      @default(0)
   accepted          Boolean  @default(false)
-  lastvisited       DateTime @default(now())
+  lastVisited       DateTime @default(now())
   createdAt         DateTime @default(now())
 }

@@ -1,20 +1,31 @@
 "use client";
 
 import { firaSansFont } from "@/app/utils/fonts";
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import { motion } from "framer-motion";
 import { Input } from "@/app/ui/components/Input";
 import { Options } from "@/app/ui/components/Options";
 import { TextArea } from "@/app/ui/components/TextArea";
+import { usePookiePageList } from "@/app/dashboard/page";
+import { IoClose } from "react-icons/io5";
+import { FaRegCopy } from "react-icons/fa";
+import { TbCopyCheckFilled } from "react-icons/tb";
 
 export function CreatePookiePage() {
+  // Context
+  const { setPookiePageList } = usePookiePageList();
+  // Ref
+  const formRef = useRef<HTMLFormElement>(null);
+  // State
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
-  const [isRefreshing, setIsRefreshing] = useState(false);
-  const [isSubmissionSucessful, setIsSubmissionSucessful] =
-    useState<boolean>(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [linkName, setLinkName] = useState<null | string>(null);
 
   async function handleFormSubmission(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setIsSubmitting(true);
+    toast.info("Creating Pookie Page...");
 
     // Get the form data
     const formData = new FormData(event.currentTarget);
@@ -33,20 +44,32 @@ export function CreatePookiePage() {
 
       if (response.status === 201) {
         const data = await response.json();
-        setIsSubmissionSucessful(true);
+        setLinkName(data.linkName);
+        setIsModalOpen(true);
+        setPookiePageList((prev) => [...(prev || []), data]);
+        toast.success("Pookie Page created successfully");
+        document.body.style.overflow = "hidden";
       }
     } catch (error) {
+      toast.error("Failed to create Pookie Page");
       console.log(error);
     } finally {
       setIsSubmitting(false);
+      formRef.current?.reset();
     }
   }
 
   return (
     <section
-      className={`w-full h-fit flex items-center justify-center ${firaSansFont.className}`}
+      className={`w-full h-fit mt-20  flex items-center justify-center ${firaSansFont.className}`}
     >
-      <div className="wrapper w-full max-w-screen-xl h-fit flex flex-col gap-4 items-start p-4">
+      <ToastContainer />
+      <PopUp
+        linkName={linkName}
+        setIsModalOpen={setIsModalOpen}
+        isModalOpen={isModalOpen}
+      />
+      <div className="wrapper w-full max-w-screen-xl h-fit flex flex-col gap-4 items-start p-4 ">
         <div className="heading font-semibold text-2xl underline">
           Create Pookie Page
         </div>
@@ -58,6 +81,7 @@ export function CreatePookiePage() {
           </div>
           <div className="form w-fit h-fit flex flex-col gap-2">
             <form
+              ref={formRef}
               onSubmit={handleFormSubmission}
               className="w-fit h-fit flex flex-col gap-6 relative"
             >
@@ -65,20 +89,20 @@ export function CreatePookiePage() {
                 <div className="name relative flex flex-row gap-4 flex-wrap w-fit h-fit">
                   <Input
                     required={true}
+                    type="text"
                     fieldName="Name"
                     placeholder="Pookie name 🥰"
                     name="name"
-                    isRefreshing={isRefreshing}
                     isSubmitting={isSubmitting}
                     width="200px"
                     height="45px"
                   />
                   <Input
                     required={false}
+                    type="number"
                     fieldName="Number"
                     placeholder="(not mandatory)"
                     name="number"
-                    isRefreshing={isRefreshing}
                     isSubmitting={isSubmitting}
                     width="200px"
                     height="45px"
@@ -90,7 +114,6 @@ export function CreatePookiePage() {
                       required={true}
                       fieldName="Type"
                       name="type"
-                      isRefreshing={isRefreshing}
                       isSubmitting={isSubmitting}
                       options={[
                         { id: "proposal", name: "Proposal" },
@@ -103,7 +126,6 @@ export function CreatePookiePage() {
                       required={true}
                       fieldName="Day"
                       name="day"
-                      isRefreshing={isRefreshing}
                       isSubmitting={isSubmitting}
                       options={[
                         { id: "rose_day", name: "Rose Day" },
@@ -125,18 +147,16 @@ export function CreatePookiePage() {
                     required={true}
                     placeholder="Landing Pickup Line 😎"
                     name="landingPickupLine"
-                    isRefreshing={isRefreshing}
                     isSubmitting={isSubmitting}
                     maxWidth="420px"
                     height="67px"
                   />
                 </div>
-                <div className="cheezyPickupLine w-full h-fit">
+                <div className="confessionLine w-full h-fit">
                   <TextArea
                     required={true}
-                    placeholder="Cheezy Pickup Line 😏, hehe boy/girl"
-                    name="landingPickupLine"
-                    isRefreshing={isRefreshing}
+                    placeholder="Confession Line 😏, hehe boy/girl"
+                    name="confessionLine"
                     isSubmitting={isSubmitting}
                     maxWidth="420px"
                     height="67px"
@@ -148,20 +168,39 @@ export function CreatePookiePage() {
                       required={true}
                       fieldName="Select Song 🎶"
                       name="songId"
-                      isRefreshing={isRefreshing}
                       isSubmitting={isSubmitting}
                       options={[
                         {
-                          id: "i_fell_in_love_with_my_best_friend",
+                          id: 0,
                           name: "I fell in love with my best friend",
                         },
                         {
-                          id: "i_still_choose_you",
-                          name: "I still choose you",
+                          id: 1,
+                          name: "8 Letters",
                         },
                         {
-                          id: "love_me_like_you_do",
+                          id: 2,
                           name: "Love me like you do",
+                        },
+                        {
+                          id: 3,
+                          name: "Perfect",
+                        },
+                        {
+                          id: 4,
+                          name: "Raabta",
+                        },
+                        {
+                          id: 5,
+                          name: "Tere Sang Yaara",
+                        },
+                        {
+                          id: 6,
+                          name: "Tera Hone Laga Hoon",
+                        },
+                        {
+                          id: 7,
+                          name: "Tera Ban Jaunga",
                         },
                       ]}
                     />
@@ -170,30 +209,15 @@ export function CreatePookiePage() {
               </div>
               <div className="buttons flex flex-row gap-2 flex-wrap">
                 <button
-                  disabled={isSubmitting || isRefreshing}
+                  disabled={isSubmitting}
                   type="submit"
                   className={`submit px-4 py-2 w-32 rounded-lg bg-[#1e40af] text-white font-semibold h-fit ${
-                    isSubmitting || isRefreshing
+                    isSubmitting
                       ? "cursor-not-allowed opacity-60"
                       : "cursor-pointer"
                   }`}
                 >
                   {isSubmitting ? "Creating..." : "Submit"}
-                </button>
-                <button
-                  disabled={isRefreshing || isSubmitting}
-                  onClick={() => {
-                    setIsRefreshing(true);
-                    window.location.reload();
-                  }}
-                  type="button"
-                  className={`refresh px-4 w-32 py-2 rounded-lg bg-red-700 text-white font-semibold h-fit ${
-                    isSubmitting || isRefreshing
-                      ? "cursor-not-allowed opacity-60"
-                      : "cursor-pointer"
-                  }`}
-                >
-                  {isRefreshing ? "Refreshing..." : "Refresh"}
                 </button>
               </div>
             </form>
@@ -201,5 +225,78 @@ export function CreatePookiePage() {
         </div>
       </div>
     </section>
+  );
+}
+
+function PopUp({
+  linkName,
+  isModalOpen,
+  setIsModalOpen,
+}: {
+  linkName: string | null;
+  isModalOpen: boolean;
+  setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}) {
+  const [CopiedClicked, setCopiedClicked] = useState<boolean>(false);
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, scale: 0 }}
+      animate={{
+        opacity: isModalOpen ? 1 : 0,
+        scale: isModalOpen ? 1 : 0,
+      }}
+      transition={{ duration: 0.3, ease: "easeInOut" }}
+      className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4"
+    >
+      <div className="bg-white p-6 rounded-lg shadow-lg max-w-96 w-full relative text-center">
+        <button
+          className="absolute top-3 right-3 text-gray-600 hover:text-gray-900"
+          onClick={() => {
+            setIsModalOpen(false);
+            document.body.style.overflow = "auto";
+          }}
+        >
+          <IoClose size={24} />
+        </button>
+        <h2 className="text-xl font-semibold mb-4">Pookie Page Created! 🎉</h2>
+        <div className="flex items-center justify-between border p-2 rounded-md bg-gray-100">
+          <span className="truncate w-full text-sm text-gray-700">
+            {`${process.env.NEXT_PUBLIC_BASE_URL}/pookie/${linkName}`}
+          </span>
+          <button
+            className="ml-2"
+            onClick={() => {
+              navigator.clipboard.writeText(
+                `${process.env.NEXT_PUBLIC_BASE_URL}/pookie/${linkName}`
+              );
+              setCopiedClicked(true);
+
+              setTimeout(() => {
+                setCopiedClicked(false);
+              }, 2500);
+            }}
+          >
+            {CopiedClicked ? (
+              <TbCopyCheckFilled size={18} className="text-green-700" />
+            ) : (
+              <FaRegCopy
+                size={18}
+                className="text-blue-400 hover:text-blue-800"
+              />
+            )}
+          </button>
+        </div>
+        <button
+          className="mt-4 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-800"
+          onClick={() => {
+            document.body.style.overflow = "auto";
+            setIsModalOpen(false);
+          }}
+        >
+          Close
+        </button>
+      </div>
+    </motion.div>
   );
 }

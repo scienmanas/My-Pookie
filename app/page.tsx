@@ -7,11 +7,15 @@ import { TermsAndPolicy } from "@/app/ui/landing/TermsAndPolicy";
 import { Donations } from "@/app/ui/universal/Donations";
 import { Footer } from "@/app/ui/universal/Footer";
 import { FallAnimation } from "@/app/ui/animations/fall-animation";
+import { BackgroundMusicPlayer } from "@/app/ui/universal/Background-music-player";
 
 export default function Home() {
+  const choose = Math.floor(Math.random() * 5);
+
   return (
     <div className="w-full h-fit page-contents flex flex-col items-center justify-center gap-4">
-      <FallAnimation count={100} delayDuration={100} emoji="♥" />
+      <FallAnimation count={50} delayDuration={100} emoji="♥" />
+      <BackgroundMusicPlayer songId={choose} type="website" volume={0.3} />
       <section className="navbar w-full h-fit">
         <Navbar />
       </section>

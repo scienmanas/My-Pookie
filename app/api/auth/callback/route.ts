@@ -25,7 +25,7 @@ export async function GET(req: NextRequest) {
     (await cookies()).set("session-token", idToken, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production" ? true : false,
-      domain: process.env.NEXT_PUBLIC_DOMAIN,
+      domain: process.env.NODE_ENV === "production" ? process.env.DOMAIN : "localhost",
       path: "/",
       maxAge: 60 * 60 * 1, // 1 hour
       sameSite: "lax",

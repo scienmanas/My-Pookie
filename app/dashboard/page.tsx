@@ -1,37 +1,71 @@
 "use client";
 
 import { PageLoader } from "@/app/ui/loaders";
-import { useEffect, useState } from "react";
+import { useEffect, useState, createContext, useContext } from "react";
 import { useRouter } from "next/navigation";
 import { Navbar } from "@/app/ui/dashboard/Navbar";
-import { Hero } from "@/app/ui/dashboard/Hero";
 import { CreatePookiePage } from "@/app/ui/dashboard/CreatePookiePage";
 import { PookiePagesList } from "@/app/ui/dashboard/PookiePagesList";
 import { Donations } from "@/app/ui/universal/Donations";
 import { Footer } from "@/app/ui/universal/Footer";
 import { FallAnimation } from "@/app/ui/animations/fall-animation";
+import { BackgroundMusicPlayer } from "@/app/ui/universal/Background-music-player";
+
+// Define Pookie Page type
+export interface PookiePageListTypes {
+  id: string;
+  name: string;
+  linkName: string;
+  visitCount: number;
+  accepted: boolean;
+  lastVisited: string;
+  createdAt: string;
+}
+
+// Define Context Type
+interface PookiePageListContextType {
+  pookiePageList: PookiePageListTypes[] | null;
+  setPookiePageList: React.Dispatch<
+    React.SetStateAction<PookiePageListTypes[] | null>
+  >;
+}
+
+// Create a context with default value as undefined
+const PookiePageListContext = createContext<
+  PookiePageListContextType | undefined
+>(undefined);
+
+// Custom hook to use context safely
+export function usePookiePageList() {
+  const context = useContext(PookiePageListContext);
+  if (!context) {
+    throw new Error("usePookiePages must be used within a PookiePagesProvider");
+  }
+  return context;
+}
 
 export default function DashboardPage() {
+  const choose = Math.floor(Math.random() * 5);
   const router = useRouter();
-
-  const [mounted, setMounted] = useState<boolean>(false);
-  const [userData, setUserData] = useState<null | {
+  const [mounted, setMounted] = useState(false);
+  const [userData, setUserData] = useState<{
     name: string;
     email: string;
     profilePhoto: string;
-  }>(null);
+  } | null>(null);
+  const [pookiePageList, setPookiePageList] = useState<
+    PookiePageListTypes[] | null
+  >(null);
 
   useEffect(() => {
     const checkAuth = async () => {
       const response = await fetch("/api/auth/user", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         credentials: "include",
       });
 
-      if (response.status === 200) {
+      if (response.ok) {
         const data = await response.json();
         setUserData({
           name: data.name,
@@ -39,7 +73,9 @@ export default function DashboardPage() {
           profilePhoto: data.profilePic,
         });
         setMounted(true);
-      } else router.push("/auth");
+      } else {
+        router.push("/auth");
+      }
     };
 
     checkAuth();
@@ -49,19 +85,20 @@ export default function DashboardPage() {
   else
     return (
       <section className="w-full h-fit relative flex flex-col items-center justify-center gap-4">
-        <FallAnimation count={70} delayDuration={100} emoji="♥" />
-        <div className="navbar w-full h-fit z-20">
-          <Navbar profilePhoto={userData?.profilePhoto as string} />
-        </div>
-        <div className="body-contents relative z-10 w-full h-fit flex flex-col items-center justify-center gap-4 mt-12">
-          <Hero
-            name={userData?.name as string}
-            email={userData!.email as string}
-          />
+        <FallAnimation count={40} delayDuration={100} emoji="♥" />
+        <BackgroundMusicPlayer songId={choose} type="website" volume={0.3} />
+        <Navbar
+          profilePhoto={userData?.profilePhoto as string}
+          email={userData?.email as string}
+          name={userData?.name as string}
+        />
+        <PookiePageListContext.Provider
+          value={{ pookiePageList, setPookiePageList }}
+        >
           <CreatePookiePage />
           <PookiePagesList />
-          <Donations />
-        </div>
+        </PookiePageListContext.Provider>
+        <Donations />
         <Footer />
       </section>
     );

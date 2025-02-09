@@ -26,7 +26,7 @@ export function TermsAndPolicy() {
               If you wish to delete all your Pookie Pages and your account,
               please email me at{" "}
               <span className="text-cyan-800 underline">
-                iamscientistmanas@gmail.com
+                hi@mypookie.xyz
               </span>
               .
             </li>

@@ -1,7 +1,6 @@
 export function TextArea({
   required,
   isSubmitting,
-  isRefreshing,
   placeholder,
   name,
   maxWidth,
@@ -9,7 +8,6 @@ export function TextArea({
 }: {
   required: boolean;
   isSubmitting: boolean;
-  isRefreshing: boolean;
   placeholder: string;
   name: string;
   maxWidth: string;
@@ -18,7 +16,7 @@ export function TextArea({
   return (
     <label htmlFor={name} className="relative">
       <textarea
-        disabled={isSubmitting || isRefreshing}
+        disabled={isSubmitting}
         required={required}
         placeholder={placeholder}
         name={name}
