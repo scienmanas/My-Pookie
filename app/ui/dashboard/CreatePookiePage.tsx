@@ -7,7 +7,7 @@ import { motion } from "framer-motion";
 import { Input } from "@/app/ui/components/Input";
 import { Options } from "@/app/ui/components/Options";
 import { TextArea } from "@/app/ui/components/TextArea";
-import { usePookiePageList } from "@/app/dashboard/page";
+import { usePookiePageList } from "@/app/hooks/usePookiePageList";
 import { IoClose } from "react-icons/io5";
 import { FaRegCopy } from "react-icons/fa";
 import { TbCopyCheckFilled } from "react-icons/tb";

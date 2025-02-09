@@ -1,7 +1,7 @@
 "use client";
 
 import { PageLoader } from "@/app/ui/loaders";
-import { useEffect, useState, createContext, useContext } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Navbar } from "@/app/ui/dashboard/Navbar";
 import { CreatePookiePage } from "@/app/ui/dashboard/CreatePookiePage";
@@ -10,6 +10,7 @@ import { Donations } from "@/app/ui/universal/Donations";
 import { Footer } from "@/app/ui/universal/Footer";
 import { FallAnimation } from "@/app/ui/animations/fall-animation";
 import { BackgroundMusicPlayer } from "@/app/ui/universal/Background-music-player";
+import { PookiePageListContext } from "@/app/hooks/usePookiePageList";
 
 // Define Pookie Page type
 export interface PookiePageListTypes {
@@ -20,28 +21,6 @@ export interface PookiePageListTypes {
   accepted: boolean;
   lastVisited: string;
   createdAt: string;
-}
-
-// Define Context Type
-interface PookiePageListContextType {
-  pookiePageList: PookiePageListTypes[] | null;
-  setPookiePageList: React.Dispatch<
-    React.SetStateAction<PookiePageListTypes[] | null>
-  >;
-}
-
-// Create a context with default value as undefined
-const PookiePageListContext = createContext<
-  PookiePageListContextType | undefined
->(undefined);
-
-// Custom hook to use context safely
-export function usePookiePageList() {
-  const context = useContext(PookiePageListContext);
-  if (!context) {
-    throw new Error("usePookiePages must be used within a PookiePagesProvider");
-  }
-  return context;
 }
 
 export default function DashboardPage() {

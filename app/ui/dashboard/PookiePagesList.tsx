@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import loaderGif from "@/public/assets/animations/all-pookie-page-loader.gif";
 import Link from "next/link";
-import { usePookiePageList } from "@/app/dashboard/page";
+import { usePookiePageList } from "@/app/hooks/usePookiePageList";
 import { PookiePageListTypes } from "@/app/dashboard/page";
 import { FaExternalLinkAlt } from "react-icons/fa";
 import { FaRegCopy } from "react-icons/fa";

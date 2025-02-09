@@ -264,7 +264,7 @@ export function Ask({
                     )}
                   </button>
                 </div>
-                {number && (
+                {number !== 0 && number && (
                   <Link
                     href={`https://wa.me/${number}`}
                     target="_blank"
