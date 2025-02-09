@@ -1,5 +1,17 @@
-import { PookiePageListTypes } from "@/app/dashboard/page";
 import { createContext, useContext } from "react";
+
+// Define Pookie Page type
+// Define Pookie Page type
+// Define Pookie Page type
+export interface PookiePageListTypes {
+  id: string;
+  name: string;
+  linkName: string;
+  visitCount: number;
+  accepted: boolean;
+  lastVisited: string;
+  createdAt: string;
+}
 
 interface PookiePageListContextType {
   pookiePageList: PookiePageListTypes[] | null;

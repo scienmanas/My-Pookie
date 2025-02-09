@@ -13,7 +13,7 @@ import { BackgroundMusicPlayer } from "@/app/ui/universal/Background-music-playe
 import { PookiePageListContext } from "@/app/hooks/usePookiePageList";
 
 // Define Pookie Page type
-export interface PookiePageListTypes {
+interface PookiePageListTypes {
   id: string;
   name: string;
   linkName: string;
