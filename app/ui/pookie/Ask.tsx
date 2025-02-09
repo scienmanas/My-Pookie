@@ -21,17 +21,17 @@ import acceptedGif from "@/public/assets/pookie/ask/accepted.gif";
 export function Ask({
   id,
   day,
-  name,
   type,
   confessionLine,
   number,
+  userId,
 }: {
   id: string;
-  name: string;
   type: string;
   day: string;
   confessionLine: string;
   number: number | null | undefined;
+  userId: string;
 }) {
   const router = useRouter();
   const [noCount, setNoCount] = useState(0);
@@ -68,8 +68,9 @@ export function Ask({
       kiss_day: "My heart skips a beat!",
       valentine_day: "Yayy.. let's meet!",
     };
-    setAskText(acceptedTexts[day] || "Yayy.. let's meet!");
-    setEmojiAsk("😍");
+    if (type === "prank") setAskText("It's a prank... Let's meet! 😂");
+    else setAskText(acceptedTexts[day] || "Yayy.. let's meet!");
+    setEmojiAsk("🥰");
     setGif(acceptedGif);
 
     // Now update the database
@@ -104,6 +105,7 @@ export function Ask({
           date: date,
           time: time,
           place: place,
+          userId: userId,
         }),
       });
 

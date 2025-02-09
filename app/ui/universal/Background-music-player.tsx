@@ -48,7 +48,7 @@ export function BackgroundMusicPlayer({
         console.log("Autoplay prevented:", error);
       });
     }
-  }, [songId, volume, type, mounted]);
+  }, [songId, volume, type, mounted, songs.pookie, songs.webiste]);
 
   return <audio ref={audioRef} loop style={{ display: "none" }} />;
 }

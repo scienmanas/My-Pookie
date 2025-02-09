@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import prisma from "@/prisma/index";
 import nodemailer from "nodemailer";
 
 const PORT: number = 465;
@@ -40,26 +41,41 @@ function formatMeeting(
 export async function POST(req: any) {
   try {
     const body = await req.json();
-    const { date, time, place } = body;
-    console.log(body);
+    const { date, time, place, userId } = body;
+
+    // Get user email
+    let user = undefined;
+    try {
+      user = await prisma.user.findUnique({
+        where: { id: userId },
+        select: { email: true },
+      });
+    } catch (error) {
+      console.log(error);
+      return NextResponse.json(
+        { message: "Internal Server Error" },
+        { status: 500 }
+      );
+    }
+
+    // If user not found, return 404
+    if (!user)
+      return NextResponse.json("User email not found", { status: 404 });
 
     // Format the meeting details in a nice way
     const meetingDetails = formatMeeting(date, time, place);
 
     // Construct a friendly email message using only escape sequences for new lines
     const emailBody =
-      "Hello,\n\nYour meeting has been confirmed for " +
+      "Hello 😊,\n\nYour meeting has been confirmed for " +
       meetingDetails +
-      ".\n\nWe look forward to meeting you and sharing a wonderful time together!\n\nBest regards,\nTeam Pookie";
-
-    // Define the recipient email (fallback to a default if NOTIFY_RECIPIENT is not provided)
-    const recipientEmail = process.env.NOTIFY_RECIPIENT || "user@example.com";
+      ".\n\nWe are super excited to meet you and share some amazing moments together! 😍\n\nBest regards,\nTeam Pookie ❤️";
 
     // Send the email using the sendMail function
     await sendMail({
-      fromName: "Pookie",
-      toEmail: recipientEmail,
-      subject: "Meeting Confirmation",
+      fromName: "My Pookie",
+      toEmail: user.email,
+      subject: "Meeting Confirmation 🎉",
       message: emailBody,
     });
 
@@ -74,7 +90,7 @@ export async function POST(req: any) {
 }
 
 // Send mail function
-export async function sendMail({
+async function sendMail({
   fromName = "",
   toName = "",
   toEmail,
@@ -98,7 +114,7 @@ export async function sendMail({
 
   // Create transporter
   const transporter = nodemailer.createTransport({
-    host: "smtppro.zoho.in",
+    host: "smtp.zoho.com",
     port: PORT,
     secure: true,
     auth: {

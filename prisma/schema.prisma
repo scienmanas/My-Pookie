@@ -26,7 +26,7 @@ model Pookie {
   type              String
   day               String
   landingPickupLine String
-  confessionLine  String
+  confessionLine    String
   songId            Int
   number            Int      @default(0)
   visitCount        Int      @default(0)

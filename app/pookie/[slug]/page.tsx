@@ -36,6 +36,7 @@ export default function PookiePage({ params }: PookiePageProps) {
     confessionLine: string;
     songId: number;
     number: number;
+    userId: string;
   }>(null);
   const [pageNo, setPageNo] = useState<number>(0);
 
@@ -74,7 +75,7 @@ export default function PookiePage({ params }: PookiePageProps) {
       }
     };
     fetchPage();
-  }, []);
+  }, [slug]);
 
   if (!mounted) return <PageLoader />;
   else if (mounted && !fetchSuccess) return notFound();
@@ -124,11 +125,11 @@ export default function PookiePage({ params }: PookiePageProps) {
               >
                 <Ask
                   id={pageSpecification?.id as string}
-                  name={pageSpecification?.name as string}
                   day={pageSpecification?.day as string}
                   type={pageSpecification?.type as string}
                   confessionLine={pageSpecification?.confessionLine as string}
                   number={pageSpecification?.number}
+                  userId={pageSpecification?.userId as string}
                 />
               </motion.div>
             )}
