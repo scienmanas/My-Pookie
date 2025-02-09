@@ -1,0 +1,33 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Heart fall animation */
+
+.heart {
+    position: fixed;
+    top: 0;
+    font-size: 20px;
+    pointer-events: none;
+    user-select: none;
+    color: #ff69b4;
+    animation: fall linear infinite;
+}
+
+.heart::after {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+@keyframes fall {
+    0% {
+        transform: translateY(0) rotate(0deg);
+    }
+
+    100% {
+        transform: translateY(100vh) rotate(360deg);
+    }
+}
+
+/*--------------------------------------------- */
