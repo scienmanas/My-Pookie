@@ -171,7 +171,7 @@ export function Ask({
           stand out to me as exceptionally beautiful and charming.
         </p>
 
-        <div className="flex flex-col items-center gap-8">
+        <div className="flex flex-col items-center gap-2">
           <h2
             className={`text-xl md:text-2xl text-center text-white ${emilysCandyFont.className}`}
           >
@@ -216,6 +216,8 @@ export function Ask({
                 <div className="flex gap-2">
                   <div className="flex-1">
                     <input
+                      disabled={isSendingDetails || isSendingSuccessful}
+                      placeholder="📅 Date ?"
                       type="date"
                       name="date"
                       required
@@ -224,6 +226,8 @@ export function Ask({
                   </div>
                   <div className="flex-1">
                     <input
+                      disabled={isSendingDetails || isSendingSuccessful}
+                      placeholder="⏰ Time ?"
                       type="time"
                       name="time"
                       required
@@ -242,7 +246,7 @@ export function Ask({
                   />
                 </div>
 
-                <div>
+                <div className="w-full h-fit flex flex-col gap-2">
                   <button
                     disabled={isSendingDetails || isSendingSuccessful}
                     type="submit"
@@ -263,20 +267,20 @@ export function Ask({
                       "Send Details ✨"
                     )}
                   </button>
+                  {number !== 0 && number && (
+                    <Link
+                      href={`https://wa.me/${number}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-full py-2 rounded-lg text-white font-semibold flex items-center justify-center gap-1 bg-green-600 hover:bg-green-700 transition-colors"
+                    >
+                      <span>
+                        <FaWhatsapp />
+                      </span>
+                      Chat 💝
+                    </Link>
+                  )}
                 </div>
-                {number !== 0 && number && (
-                  <Link
-                    href={`https://wa.me/${number}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-full py-2 rounded-lg text-white font-semibold flex items-center justify-center gap-1 bg-green-600 hover:bg-green-700 transition-colors"
-                  >
-                    <span>
-                      <FaWhatsapp />
-                    </span>
-                    Chat 💝
-                  </Link>
-                )}
               </form>
             </div>
           )}
