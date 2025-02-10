@@ -21,6 +21,7 @@ interface PookiePageListTypes {
   accepted: boolean;
   lastVisited: string;
   createdAt: string;
+  type: string;
 }
 
 export default function DashboardPage() {
