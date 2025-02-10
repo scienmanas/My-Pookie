@@ -190,7 +190,12 @@ export function Ask({
           stand out to me as exceptionally beautiful and charming.
         </p>
 
-        <div className="flex flex-col items-center gap-2">
+        <div
+          style={{
+            gap: accepted ? "8px" : "32px",
+          }}
+          className="flex flex-col items-center"
+        >
           <h2
             className={`text-lg sm:text-xl md:text-2xl text-center text-white ${emilysCandyFont.className}`}
           >
