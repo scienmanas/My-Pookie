@@ -41,7 +41,7 @@ function formatMeeting(
 export async function POST(req: any) {
   try {
     const body = await req.json();
-    const { date, time, place, userId } = body;
+    const { date, time, place, userId, message } = body;
 
     // Get user email
     let user = undefined;
@@ -65,11 +65,8 @@ export async function POST(req: any) {
     // Format the meeting details in a nice way
     const meetingDetails = formatMeeting(date, time, place);
 
-    // Construct a friendly email message using only escape sequences for new lines
-    const emailBody =
-      "Hello 😊,\n\nYour meeting has been confirmed for " +
-      meetingDetails +
-      ".\n\nWe are super excited to meet you and share some amazing moments together! 😍\n\nBest regards,\nTeam Pookie ❤️";
+    // Construct a friendly and polished email message including your personal note.
+    const emailBody = `Hello 😊,\n\nYour meeting has been confirmed for: ${meetingDetails}. You pookie/friend shared the following message with you:"${message}"\n\nLooking forward to crafting beautiful memories of you two together!\n\n--\nBest regards,\nMy Pookie`;
 
     // Send the email using the sendMail function
     await sendMail({
@@ -125,7 +122,6 @@ async function sendMail({
   const mailOptions: nodemailer.SendMailOptions = {
     from: `${fromName} <${EMAIL}>`,
     to: `${toName} <${toEmail}>`,
-    replyTo: `Manas <manas@certimailer.xyz>`,
     subject: subject,
     text: message,
   };

@@ -30,6 +30,7 @@ export function CreatePookiePage() {
     // Get the form data
     const formData = new FormData(event.currentTarget);
     const jsonData = Object.fromEntries(formData.entries());
+    console.log(jsonData)
 
     try {
       // Send the form data to the server

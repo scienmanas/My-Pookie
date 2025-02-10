@@ -9,6 +9,7 @@ import Link from "next/link";
 import { pangolinFont, emilysCandyFont, firaSansFont } from "@/app/utils/fonts";
 import { SubmissionLoader } from "@/app/ui/loaders";
 import { FaWhatsapp } from "react-icons/fa";
+import { TextArea } from "@/app/ui/components/TextArea";
 
 //  Gifs
 import askGif0 from "@/public/assets/pookie/ask/0.gif";
@@ -110,6 +111,7 @@ export function Ask({
     const date = formData.get("date");
     const time = formData.get("time");
     const place = formData.get("place");
+    const message = formData.get("message");
 
     try {
       const response = await fetch("/api/page/notify", {
@@ -122,6 +124,7 @@ export function Ask({
           time: time,
           place: place,
           userId: userId,
+          message: message,
         }),
       });
 
@@ -176,20 +179,25 @@ export function Ask({
           unoptimized
           src={Gif}
           alt="Ask"
-          className="select-none pointer-events-none w-[200px] sm:w-[300px] md:w-[350px] h-fit"
+          className="select-none pointer-events-none w-[180px] sm:w-[200px] md:w-[390px] h-fit"
         />
       </div>
-      <div className="z-10 flex flex-col items-center gap-8 px-4">
+      <div className="z-10 flex flex-col items-center gap-4 px-4">
         <p
-          className={`text-xl md:text-2xl text-center max-w-[44rem] text-white ${pangolinFont.className}`}
+          className={`text-lg md:text-xl lg:text-2xl text-center max-w-[44rem] text-white ${pangolinFont.className}`}
         >
           In a world brimming with over 3.95 billion extraordinary souls, you
           stand out to me as exceptionally beautiful and charming.
         </p>
 
-        <div className="flex flex-col items-center gap-2">
+        <div
+          style={{
+            gap: accepted ? "8px" : "32px",
+          }}
+          className="flex flex-col items-center"
+        >
           <h2
-            className={`text-xl md:text-2xl text-center text-white ${emilysCandyFont.className}`}
+            className={`text-lg sm:text-xl md:text-2xl text-center text-white ${emilysCandyFont.className}`}
           >
             {askText} <span>{emojiAsk}</span>
           </h2>
@@ -237,7 +245,7 @@ export function Ask({
                       type="date"
                       name="date"
                       required
-                      className="w-full p-2 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                      className="w-full p-2 text-sm text-black rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500"
                     />
                   </div>
                   <div className="flex-1">
@@ -247,7 +255,7 @@ export function Ask({
                       type="time"
                       name="time"
                       required
-                      className="w-full p-2 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                      className="w-full p-2 text-sm text-black rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500"
                     />
                   </div>
                 </div>
@@ -258,11 +266,20 @@ export function Ask({
                     name="place"
                     placeholder="Where should we meet?"
                     required
-                    className="w-full p-2 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                    className="w-full text-sm text-black p-2 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500"
                   />
                 </div>
-
-                <div className="w-full h-fit flex flex-col gap-2">
+                <div className="message-box w-full h-fit">
+                  <textarea
+                    required
+                    minLength={2}
+                    name="message"
+                    id="message"
+                    className="w-full h-16 text-sm p-2 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                    placeholder="Any special message?"
+                  ></textarea>
+                </div>
+                <div className="buttons w-full h-fit flex flex-col gap-2">
                   <button
                     disabled={isSendingDetails || isSendingSuccessful}
                     type="submit"
