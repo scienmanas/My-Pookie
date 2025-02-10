@@ -4,20 +4,20 @@ import { markdownParser } from "@/app/utils/markdown-parser";
 import { firaSansFont } from "@/app/utils/fonts";
 
 type PageProps = {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 };
 
 function getMarkDownData(slug: string) {
-  const data = markdownParser("legal", slug);
-  return data;
+  return markdownParser("legal", slug);
 }
 
 // Generate the metadata for the legal page
 export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
-  const pageURL = process.env.BASE_URL + `/legal/${params.slug}`;
-  const data = getMarkDownData(params.slug);
+  const { slug } = await params;
+  const pageURL = process.env.BASE_URL + `/legal/${slug}`;
+  const data = getMarkDownData(slug);
 
   return {
     metadataBase: new URL(process.env.BASE_URL as string),
@@ -43,8 +43,9 @@ export async function generateMetadata({
   };
 }
 
-export default function PrivacyPolicy({ params }: PageProps) {
-  const data = markdownParser("legal", params.slug);
+export default async function PrivacyPolicy({ params }: PageProps) {
+  const { slug } = await params;
+  const data = markdownParser("legal", slug);
 
   return (
     <section
@@ -56,7 +57,7 @@ export default function PrivacyPolicy({ params }: PageProps) {
             {data.heading}
           </div>
           <div className="content text-base text-neutral-700 dark:text-neutral-300 sm:text-lg markdown">
-            <Markdown>{data.content}</Markdown>{" "}
+            <Markdown>{data.content}</Markdown>
           </div>
         </div>
       </div>
