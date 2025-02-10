@@ -28,7 +28,7 @@ Create a `.env` file in the root directory with the following variables:
 | NEXT_PUBLIC_GOOGLE_CLIENT_ID    | client_id                               | Public Google OAuth client ID             |
 | NEXT_PUBLIC_GOOGLE_REDIRECT_URI | http://localhost:3000/api/auth/callback | OAuth callback URL                        |
 | ADMIN_EMAIL                     | xx@xxxxx.xxx                            | Administrator email for notifications     |
-| ADMIN_APP_PASSWORD              | 0dxWr4eRH4WX                            | Application password for email operations |
+| ADMIN_APP_PASSWORD              | ____________                            | Application password for email operations |
 
 ## Features
 
