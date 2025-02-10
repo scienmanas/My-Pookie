@@ -5,7 +5,10 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import loaderGif from "@/public/assets/animations/all-pookie-page-loader.gif";
 import Link from "next/link";
-import { usePookiePageList, PookiePageListTypes  } from "@/app/hooks/usePookiePageList";
+import {
+  usePookiePageList,
+  PookiePageListTypes,
+} from "@/app/hooks/usePookiePageList";
 import { FaExternalLinkAlt } from "react-icons/fa";
 import { FaRegCopy } from "react-icons/fa";
 import { MdDeleteForever } from "react-icons/md";
@@ -81,6 +84,9 @@ function PookiePageFetchedList({
               Name
             </th>
             <th className="border border-gray-300 p-2 text-neutral-800 text-center">
+              Type
+            </th>
+            <th className="border border-gray-300 p-2 text-neutral-800 text-center">
               Accepted
             </th>
             <th className="border border-gray-300 p-2 text-neutral-800 text-center">
@@ -105,6 +111,9 @@ function PookiePageFetchedList({
             >
               <td className="border border-gray-300 p-2 text-neutral-700 text-center">
                 {page.name}
+              </td>
+              <td className="border border-gray-300 p-2 text-neutral-700 text-center">
+                {page.type}
               </td>
               <td className="border border-gray-300 p-2 text-neutral-700 text-center">
                 {page.accepted === true ? "Yes" : "No"}

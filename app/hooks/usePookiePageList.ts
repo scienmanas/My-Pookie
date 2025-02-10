@@ -1,8 +1,6 @@
 import { createContext, useContext } from "react";
 
 // Define Pookie Page type
-// Define Pookie Page type
-// Define Pookie Page type
 export interface PookiePageListTypes {
   id: string;
   name: string;
@@ -11,6 +9,7 @@ export interface PookiePageListTypes {
   accepted: boolean;
   lastVisited: string;
   createdAt: string;
+  type: string;
 }
 
 interface PookiePageListContextType {
