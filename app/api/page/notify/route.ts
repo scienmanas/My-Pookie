@@ -112,11 +112,9 @@ async function sendMail({
     );
   }
 
-  // Create transporter
+  // Create transporter using Gmail's SMTP settings
   const transporter = nodemailer.createTransport({
-    host: "smtp.zoho.com",
-    port: PORT,
-    secure: true,
+    service: "gmail",
     auth: {
       user: EMAIL,
       pass: PASSWORD,
