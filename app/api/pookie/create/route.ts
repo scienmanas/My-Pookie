@@ -7,15 +7,8 @@ export async function POST(req: NextRequest) {
   if (!success) return NextResponse.redirect(new URL("/", req.url));
 
   const body = await req.json();
-  const {
-    name,
-    type,
-    day,
-    landingPickupLine,
-    confessionLine,
-    songId,
-    number,
-  } = body;
+  const { name, type, day, landingPickupLine, confessionLine, songId, number } =
+    body;
 
   // Validate the required fields
   if (
@@ -69,6 +62,7 @@ export async function POST(req: NextRequest) {
         accepted: pookie.accepted,
         lastVisited: pookie.lastVisited,
         createdAt: pookie.createdAt,
+        type: pookie.type,
       },
       { status: 201 }
     );

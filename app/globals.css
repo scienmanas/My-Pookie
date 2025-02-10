@@ -31,3 +31,79 @@
 }
 
 /*--------------------------------------------- */
+
+
+/* ----------------------------------------------- */
+
+/* Hero Markdown */
+
+.markdown {
+    /* General text styling */
+    @apply text-gray-700;
+    word-wrap: break-word; /* For older browser support */
+    overflow-wrap: anywhere; /* Allows breaking anywhere in the word */
+}
+  
+.markdown h1 {
+    @apply text-3xl font-bold text-gray-900;
+    margin-top: 24px;
+    margin-bottom: 16px;
+}
+  
+.markdown h2 {
+    @apply text-2xl font-semibold text-gray-800;
+    margin-top: 20px;
+    margin-bottom: 12px;
+}
+  
+.markdown h3 {
+    @apply text-xl font-semibold text-gray-700;
+    margin-top: 16px;
+    margin-bottom: 8px;
+}
+  
+.markdown ul {
+    @apply list-disc pl-5 mt-4;
+}
+  
+.markdown ol {
+    @apply list-decimal pl-5 mt-4; /* Ensures numbered lists are styled */
+}
+  
+.markdown li {
+    @apply mb-2;
+    @apply text-base text-gray-700;
+}
+  
+.markdown p {
+    margin-top: 16px;
+    margin-bottom: 16px;
+    @apply text-base text-gray-700;
+}
+  
+.markdown b,
+.markdown strong {
+    @apply font-bold text-gray-900; /* Ensures bold text displays correctly */
+}
+  
+.markdown pre {
+    @apply bg-gray-100 p-4 rounded-md;
+    width: fit-content;
+    height: fit-content;
+}
+  
+.markdown code {
+    @apply bg-gray-200 text-sm p-1 rounded;
+    white-space: pre-wrap; /* Preserve whitespace but wrap long lines */
+    word-wrap: break-word;
+    overflow-wrap: anywhere;
+    overflow-x: auto; /* Enable horizontal scroll for very long unbreakable lines */
+}
+  
+.markdown a {
+    @apply underline text-blue-600;
+    color: blue;
+    decoration-color: yellow;
+}
+  
+/* ----------------------------------------------- */

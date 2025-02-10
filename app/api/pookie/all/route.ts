@@ -19,6 +19,7 @@ export async function GET(req: NextRequest) {
         accepted: true,
         lastVisited: true,
         createdAt: true,
+        type: true,
       },
     });
 

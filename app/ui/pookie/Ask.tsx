@@ -54,23 +54,39 @@ export function Ask({
     hug_day: "🤗",
     kiss_day: "💋",
     valentine_day: "❤️",
+    birthday: "🥳",
+    aniversary: "💖",
   };
 
   const handleYesClick = async () => {
     setAccepted(true);
-    const acceptedTexts: { [key: string]: string } = {
-      rose_day: "Yay! Let me get you the prettiest roses!",
-      propose_day: "You've made me the happiest person!",
-      chocolate_day: "Sweet! Let's share some chocolates!",
-      teddy_day: "Time for the biggest teddy bear hug!",
-      promise_day: "I promise to keep this promise forever!",
-      hug_day: "Come here for the warmest hug!",
-      kiss_day: "My heart skips a beat!",
-      valentine_day: "Yayy.. let's meet!",
-    };
-    if (type === "prank") setAskText("It's a prank... Let's meet! 😂");
-    else setAskText(acceptedTexts[day] || "Yayy.. let's meet!");
-    setEmojiAsk("🥰");
+    if (type === "prank") {
+      setAskText("It's a prank... Let's meet! 😂");
+      setEmojiAsk("😜");
+    } else if (day === "birthday") {
+      setAskText(
+        "Happy Birthday! You are 1.3 billion reasons to celebrate—let's make today unforgettable!"
+      );
+      setEmojiAsk("🥳");
+    } else if (day === "aniversary") {
+      setAskText(
+        "Happy Anniversary! Every moment with you feels like 1.3 billion heartbeats of love—let's cherish us!"
+      );
+      setEmojiAsk("💖");
+    } else {
+      const acceptedTexts: { [key: string]: string } = {
+        rose_day: "Yay! Let me get you the prettiest roses!",
+        propose_day: "You've made me the happiest person!",
+        chocolate_day: "Sweet! Let's share some chocolates!",
+        teddy_day: "Time for the biggest teddy bear hug!",
+        promise_day: "I promise to keep this promise forever!",
+        hug_day: "Come here for the warmest hug!",
+        kiss_day: "My heart skips a beat!",
+        valentine_day: "Yayy.. let's meet!",
+      };
+      setAskText(acceptedTexts[day] || "Yayy.. let's meet!");
+      setEmojiAsk("🥰");
+    }
     setGif(acceptedGif);
 
     // Now update the database
