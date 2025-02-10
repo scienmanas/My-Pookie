@@ -7,10 +7,21 @@ export async function POST(request: NextRequest) {
 
   // Delete the token if it exists
   if (sessionToken) {
-    (await cookieStore).delete("session-token");
+    (await cookieStore).delete({
+      name: "session-token",
+      domain:
+        process.env.NODE_ENV === "production"
+          ? process.env.DOMAIN
+          : "localhost",
+      path: "/",
+    });
     return NextResponse.json(
       { message: "Logged out successfully" },
       { status: 200 }
     );
   }
+  return NextResponse.json(
+    { message: "No session to log out" },
+    { status: 200 }
+  );
 }
