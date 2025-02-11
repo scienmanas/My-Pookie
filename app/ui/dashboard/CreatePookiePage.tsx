@@ -30,7 +30,7 @@ export function CreatePookiePage() {
     // Get the form data
     const formData = new FormData(event.currentTarget);
     const jsonData = Object.fromEntries(formData.entries());
-    console.log(jsonData)
+    console.log(jsonData);
 
     try {
       // Send the form data to the server
@@ -118,6 +118,7 @@ export function CreatePookiePage() {
                       isSubmitting={isSubmitting}
                       options={[
                         { id: "proposal", name: "Proposal" },
+                        { id: "open", name: "Open to anyone" },
                         { id: "prank", name: "Prank" },
                       ]}
                     />

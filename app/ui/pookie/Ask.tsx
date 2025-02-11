@@ -276,7 +276,11 @@ export function Ask({
                     name="message"
                     id="message"
                     className="w-full h-16 text-sm p-2 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                    placeholder="Any special message?"
+                    placeholder={
+                      type === "open"
+                        ? "💌😊 Any special message, please include your name too"
+                        : "💌😊 Any special message?"
+                    }
                   ></textarea>
                 </div>
                 <div className="buttons w-full h-fit flex flex-col gap-2">
