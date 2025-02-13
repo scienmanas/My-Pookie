@@ -27,7 +27,7 @@ At My Pookie, your privacy is of utmost importance to us. This document outlines
    - My Pookie does not share your personal data with any third-party services unless it is essential for providing core functionality (e.g., email delivery services). Such services are carefully vetted to ensure compliance with privacy standards.
 
 5. **User Control**:
-   - You retain control over your data. **If you wish to delete all your Pookie Pages and your account, please email us at [hi@mypookie.xyz](mailto:hi@mypookie.xyz).**
+   - You retain control over your data. **If you wish to delete all your Pookie Pages and your account, please email us at [iamscientistmanas@gmail.com](mailto:iamscientistmanas@gmail.com).**
 
 6. **Cookies and Tracking**:
    - My Pookie uses cookies to enhance user experience and analyze site performance. These cookies do not store personal information and can be disabled via browser settings.
@@ -40,10 +40,10 @@ At My Pookie, your privacy is of utmost importance to us. This document outlines
 
 9. **Contact Information**:
    - If you have questions or concerns about our privacy practices, reach out to us:
-     - **Email**: [hi@mypookie.xyz](mailto:hi@mypookie.xyz)
+     - **Email**: [iamscientistmanas@gmail.com](mailto:iamscientistmanas@gmail.com)
 
 <br/><br/>
 
 Cheers 🥂,  
 **My Pookie**  
-[Email](mailto:hi@mypookie.xyz)
+[Email](mailto:iamscientistmanas@gmail.com)

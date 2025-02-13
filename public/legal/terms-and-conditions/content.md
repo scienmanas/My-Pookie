@@ -49,10 +49,10 @@ By accessing and using the My Pookie application, you agree to be bound by the f
 
 8. **Contact Information**:
    - For any inquiries or concerns, contact us at:
-     - **Email**: [hi@mypookie.xyz](mailto:hi@mypookie.xyz)
+     - **Email**: [iamscientistmanas@gmail.com](mailto:iamscientistmanas@gmail.com)
 
 <br/><br/>
 
 Cheers 🥂,  
 **My Pookie**  
-[Email](mailto:hi@mypookie.xyz)
+[Email](mailto:iamscientistmanas@gmail.com)
