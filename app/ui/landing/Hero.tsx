@@ -35,7 +35,7 @@ export function Hero() {
             Need extra personal touch, contact me, I can help you with that!.
             Mail me at:{" "}
             <span className="underline font-semibold text-cyan-600">
-              <Link href={"mailto:hi@mypookie.xyz"}>hi@mypookie.xyz</Link>
+              <Link href={"mailto:iamscientistmanas@gmail.com"}>iamscientistmanas@gmail.com</Link>
             </span>
           </div>
         </div>
