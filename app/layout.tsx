@@ -3,7 +3,6 @@ import "@/app/globals.css";
 import metaDataImg from "@/public/metadata/landing.png";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import { Viewport } from "next";
-import { OpacityTracker } from "payfade-test";
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.BASE_URL as string),
@@ -51,7 +50,6 @@ export default function RootLayout({
           gaId={process.env.G_ANALYTICS_ID as string}
           debugMode={false}
         />
-        <OpacityTracker  apiKey="942aa23c-75d7-485e-9194-2c7ef609822b"/>
       </body>
     </html>
   );
